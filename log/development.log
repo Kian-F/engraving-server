@@ -1,0 +1,1113 @@
+  [1m[35m (223.2ms)[0m  [1m[35mCREATE DATABASE "engraving_Server_development" ENCODING = 'unicode'[0m
+  [1m[35m (94.2ms)[0m  [1m[35mCREATE DATABASE "engraving_Server_test" ENCODING = 'unicode'[0m
+  [1m[35m (32.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (46.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20191208223103)
+  [1m[35m (40.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (9.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "phone_number" character varying, "address" character varying, "admin" boolean, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (3.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191208223103"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProducts (20191208224112)
+  [1m[35m (24.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying, "img_tag" character varying, "category" character varying, "price" float, "width" integer, "height" integer, "fixing_method" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191208224112"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrders (20191208224539)
+  [1m[35m (24.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191208224539"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserIdOrders (20191208225034)
+  [1m[35m (24.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191208225034"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (26.0ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-12-08 22:50:50.244202"], ["updated_at", "2019-12-08 22:50:50.244202"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (46.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddTotalPriceOrders (20191208225314)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mprimary::SchemaMigration Create (40.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191208225314"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateLineItems (20191208225604)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (44.8ms)[0m  [1m[35mCREATE TABLE "line_items" ("id" bigserial primary key, "quantity" integer, "product_id" integer, "order_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191208225604"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddMaterialToProducts (20191209002655)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (45.1ms)[0m  [1m[35mALTER TABLE "products" ADD "material" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191209002655"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (44.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (42.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (1.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "admin", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "kian"], ["email", "kian@gmail.com"], ["admin", true], ["password_digest", "$2a$12$Wd5JlfaShBQtUs6.SPhu9u3.xBJA34lE4AWYdjLBycPWR9R2.0AW2"], ["created_at", "2019-12-09 02:03:22.592334"], ["updated_at", "2019-12-09 02:03:22.592334"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (3.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mProduct Load (34.8ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (1.4ms)[0m  [1m[32mINSERT INTO "products" ("name", "img_tag", "category", "price", "width", "height", "fixing_method", "created_at", "updated_at", "material") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "London"], ["img_tag", "https://sdo.textalk.se/upload/doorsigns/fornicklad_massing_jcgt4748.svg"], ["category", "Door Sign"], ["price", 30.0], ["width", 40], ["height", 30], ["fixing_method", "scrow"], ["created_at", "2019-12-09 02:03:22.657554"], ["updated_at", "2019-12-09 02:03:22.657554"], ["material", "Silver Brass"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.4ms)[0m  [1m[32mINSERT INTO "products" ("name", "img_tag", "category", "price", "width", "height", "fixing_method", "created_at", "updated_at", "material") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Oslo"], ["img_tag", "https://sdo.textalk.se/upload/doorsigns/blank_massing_jcgt4746.svg"], ["category", "Door Sign"], ["price", 30.0], ["width", 40], ["height", 30], ["fixing_method", "scrow"], ["created_at", "2019-12-09 02:03:22.662676"], ["updated_at", "2019-12-09 02:03:22.662676"], ["material", "Matt Brass"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "products"[0m
+  [1m[36mOrder Load (26.2ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (43.9ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "admin", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "kian"], ["email", "kian@gmail.com"], ["admin", true], ["password_digest", "$2a$12$u600ikAeYKf.z13OHLC.F.r.dv4uVPcy6qt9vgDX0IOT2zyKeNOmu"], ["created_at", "2019-12-09 02:04:10.961551"], ["updated_at", "2019-12-09 02:04:10.961551"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mProduct Load (42.9ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Destroy (0.4ms)[0m  [1m[31mDELETE FROM "products" WHERE "products"."id" = $1[0m  [["id", 1]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Destroy (0.3ms)[0m  [1m[31mDELETE FROM "products" WHERE "products"."id" = $1[0m  [["id", 2]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.5ms)[0m  [1m[32mINSERT INTO "products" ("name", "img_tag", "category", "price", "width", "height", "fixing_method", "created_at", "updated_at", "material") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "London"], ["img_tag", "https://sdo.textalk.se/upload/doorsigns/fornicklad_massing_jcgt4748.svg"], ["category", "Door Sign"], ["price", 30.0], ["width", 40], ["height", 30], ["fixing_method", "scrow"], ["created_at", "2019-12-09 02:04:11.035504"], ["updated_at", "2019-12-09 02:04:11.035504"], ["material", "Silver Brass"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.4ms)[0m  [1m[32mINSERT INTO "products" ("name", "img_tag", "category", "price", "width", "height", "fixing_method", "created_at", "updated_at", "material") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Oslo"], ["img_tag", "https://sdo.textalk.se/upload/doorsigns/blank_massing_jcgt4746.svg"], ["category", "Door Sign"], ["price", 30.0], ["width", 40], ["height", 30], ["fixing_method", "scrow"], ["created_at", "2019-12-09 02:04:11.039548"], ["updated_at", "2019-12-09 02:04:11.039548"], ["material", "Matt Brass"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "products"[0m
+  [1m[36mOrder Load (0.6ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddMaterialToProducts (20191209002655)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (47.7ms)[0m  [1m[35mALTER TABLE "products" DROP COLUMN "material"[0m
+  [1m[36mprimary::SchemaMigration Destroy (0.6ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20191209002655"]]
+  [1m[35m (40.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateLineItems (20191208225604)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (48.4ms)[0m  [1m[35mDROP TABLE "line_items"[0m
+  [1m[36mprimary::SchemaMigration Destroy (0.6ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = $1[0m  [["version", "20191208225604"]]
+  [1m[35m (45.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddTotalPriceToOrders (20191208225314)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (41.6ms)[0m  [1m[35mALTER TABLE "orders" DROP COLUMN "total_price"[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddTotalPriceToOrders (20191208225314)
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (25.2ms)[0m  [1m[35mALTER TABLE "orders" DROP COLUMN "total_price"[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddTotalPriceToOrders (20191208225314)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.2ms)[0m  [1m[35mALTER TABLE "orders" DROP COLUMN "total_price"[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (86.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "engraving_Server_development"[0m
+  [1m[35m (38.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "engraving_Server_test"[0m
+  [1m[35m (182.0ms)[0m  [1m[35mCREATE DATABASE "engraving_Server_development" ENCODING = 'unicode'[0m
+  [1m[35m (85.5ms)[0m  [1m[35mCREATE DATABASE "engraving_Server_test" ENCODING = 'unicode'[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(3424580400080642145)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20191208223103)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (49.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "email" character varying, "phone_number" character varying, "address" character varying, "admin" boolean DEFAULT FALSE, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191208223103"]]
+  [1m[35m (40.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProducts (20191208224112)
+  [1m[35m (40.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.4ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "name" character varying, "img_tag" character varying, "category" character varying, "price" float, "width" integer, "height" integer, "fixing_method" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191208224112"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrders (20191208224539)
+  [1m[35m (40.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191208224539"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddUserIdToOrders (20191208225034)
+  [1m[35m (40.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "orders" ADD "user_id" integer[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191208225034"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddTotalPriceToOrders (20191208225314)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "orders" ADD "total_price" float[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191208225314"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateLineItems (20191208225604)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (42.5ms)[0m  [1m[35mCREATE TABLE "line_items" ("id" bigserial primary key, "quantity" integer, "product_id" integer, "order_id" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191208225604"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddMaterialToProducts (20191209002655)
+  [1m[35m (39.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "products" ADD "material" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20191209002655"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-12-09 02:13:11.555120"], ["updated_at", "2019-12-09 02:13:11.555120"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(3424580400080642145)[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "admin", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "kian"], ["email", "kian@gmail.com"], ["admin", true], ["password_digest", "$2a$12$IUn.BvP/r/PtVCeCBF6vO.pR/6Hn4v0HNI2wcXjsOi4v3Hd2C1hSS"], ["created_at", "2019-12-09 02:14:17.622431"], ["updated_at", "2019-12-09 02:14:17.622431"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mProduct Load (3.2ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.8ms)[0m  [1m[32mINSERT INTO "products" ("name", "img_tag", "category", "price", "width", "height", "fixing_method", "created_at", "updated_at", "material") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "London"], ["img_tag", "https://sdo.textalk.se/upload/doorsigns/fornicklad_massing_jcgt4748.svg"], ["category", "Door Sign"], ["price", 30.0], ["width", 40], ["height", 30], ["fixing_method", "scrow"], ["created_at", "2019-12-09 02:14:17.654579"], ["updated_at", "2019-12-09 02:14:17.654579"], ["material", "Silver Brass"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.4ms)[0m  [1m[32mINSERT INTO "products" ("name", "img_tag", "category", "price", "width", "height", "fixing_method", "created_at", "updated_at", "material") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Oslo"], ["img_tag", "https://sdo.textalk.se/upload/doorsigns/blank_massing_jcgt4746.svg"], ["category", "Door Sign"], ["price", 30.0], ["width", 40], ["height", 30], ["fixing_method", "scrow"], ["created_at", "2019-12-09 02:14:17.659114"], ["updated_at", "2019-12-09 02:14:17.659114"], ["material", "Matt Brass"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "products"[0m
+  [1m[36mOrder Load (0.7ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Create (0.6ms)[0m  [1m[32mINSERT INTO "orders" ("created_at", "updated_at", "user_id", "total_price") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-12-09 02:14:17.676122"], ["updated_at", "2019-12-09 02:14:17.676122"], ["user_id", 1], ["total_price", 30.0]]
+  [1m[35m (40.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders"[0m
+  [1m[36mLineItem Load (0.8ms)[0m  [1m[34mSELECT "line_items".* FROM "line_items"[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Destroy (2.2ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  [1m[35m (40.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "admin", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "kian"], ["email", "kian@gmail.com"], ["admin", true], ["password_digest", "$2a$12$M/MHGUs8uu9MuHjMkhbA9.iNZwWRqRZjvsTut8le55PgeQEU/OryS"], ["created_at", "2019-12-09 02:14:44.671063"], ["updated_at", "2019-12-09 02:14:44.671063"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "users"[0m
+  [1m[36mProduct Load (1.6ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Destroy (0.4ms)[0m  [1m[31mDELETE FROM "products" WHERE "products"."id" = $1[0m  [["id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Destroy (0.4ms)[0m  [1m[31mDELETE FROM "products" WHERE "products"."id" = $1[0m  [["id", 2]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.5ms)[0m  [1m[32mINSERT INTO "products" ("name", "img_tag", "category", "price", "width", "height", "fixing_method", "created_at", "updated_at", "material") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "London"], ["img_tag", "https://sdo.textalk.se/upload/doorsigns/fornicklad_massing_jcgt4748.svg"], ["category", "Door Sign"], ["price", 30.0], ["width", 40], ["height", 30], ["fixing_method", "scrow"], ["created_at", "2019-12-09 02:14:44.710074"], ["updated_at", "2019-12-09 02:14:44.710074"], ["material", "Silver Brass"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.4ms)[0m  [1m[32mINSERT INTO "products" ("name", "img_tag", "category", "price", "width", "height", "fixing_method", "created_at", "updated_at", "material") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING "id"[0m  [["name", "Oslo"], ["img_tag", "https://sdo.textalk.se/upload/doorsigns/blank_massing_jcgt4746.svg"], ["category", "Door Sign"], ["price", 30.0], ["width", 40], ["height", 30], ["fixing_method", "scrow"], ["created_at", "2019-12-09 02:14:44.713896"], ["updated_at", "2019-12-09 02:14:44.713896"], ["material", "Matt Brass"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "products"[0m
+  [1m[36mOrder Load (0.6ms)[0m  [1m[34mSELECT "orders".* FROM "orders"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Destroy (0.6ms)[0m  [1m[31mDELETE FROM "orders" WHERE "orders"."id" = $1[0m  [["id", 1]]
+  [1m[35m (26.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mOrder Create (1.7ms)[0m  [1m[32mINSERT INTO "orders" ("created_at", "updated_at", "user_id", "total_price") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["created_at", "2019-12-09 02:14:44.759706"], ["updated_at", "2019-12-09 02:14:44.759706"], ["user_id", 2], ["total_price", 30.0]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "orders"[0m
+  [1m[36mLineItem Load (0.6ms)[0m  [1m[34mSELECT "line_items".* FROM "line_items"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mLineItem Create (0.7ms)[0m  [1m[32mINSERT INTO "line_items" ("quantity", "product_id", "order_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["quantity", 1], ["product_id", 3], ["order_id", 2], ["created_at", "2019-12-09 02:14:44.780410"], ["updated_at", "2019-12-09 02:14:44.780410"]]
+  [1m[35m (40.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "line_items"[0m
+Started GET "/" for ::1 at 2019-12-09 14:14:59 +1100
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/kia/.rvm/gems/ruby-2.6.5/gems/railties-6.0.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/kia/.rvm/gems/ruby-2.6.5/gems/railties-6.0.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 15.6ms | Allocations: 466)
+Completed 200 OK in 33ms (Views: 23.1ms | ActiveRecord: 0.0ms | Allocations: 2583)
+
+
+Started GET "/users" for ::1 at 2019-12-09 14:20:10 +1100
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+actionpack (6.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.2.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/users/new" for ::1 at 2019-12-09 14:20:31 +1100
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 86)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /Users/kia/Projects/project3/server/engraving-Server/public/packs
+[Webpacker] Hash: 68c398a040b8873969b0
+Version: webpack 4.41.2
+Time: 1218ms
+Built at: 09/12/2019 2:20:34 pm
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-7c66b63ed59caf04d2f0.js   34.7 KiB  application  [emitted] [immutable]  application
+js/application-7c66b63ed59caf04d2f0.js.map   38.3 KiB  application  [emitted] [dev]        application
+                             manifest.json  364 bytes               [emitted]              
+Entrypoint application = js/application-7c66b63ed59caf04d2f0.js js/application-7c66b63ed59caf04d2f0.js.map
+[./app/javascript/packs/application.js] 653 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 1 hidden module
+
+Completed 200 OK in 3445ms (Views: 3443.9ms | ActiveRecord: 0.0ms | Allocations: 31793)
+
+
+Started GET "/" for ::1 at 2019-12-09 14:23:43 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 82)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 18ms (Views: 16.9ms | ActiveRecord: 0.0ms | Allocations: 4545)
+
+
+Started GET "/" for ::1 at 2019-12-09 14:33:12 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 80)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 20ms (Views: 18.8ms | ActiveRecord: 0.0ms | Allocations: 4899)
+
+
+Started GET "/" for ::1 at 2019-12-09 14:43:51 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (Duration: 2.1ms | Allocations: 1444)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.0ms | Allocations: 2247)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    14:   </thead>
+    15: 
+    16:   <tbody>
+    17:     <% @products.each do |product| %>
+    18:     <tr>
+    19:       <td><%= product.name %></td>
+    20:       <td><%= product.price%></td>
+  
+app/views/products/index.html.erb:17
+Started GET "/" for ::1 at 2019-12-09 14:44:28 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (Duration: 2.4ms | Allocations: 1424)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 2222)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    14:   </thead>
+    15: 
+    16:   <tbody>
+    17:     <% @products.each do |product| %>
+    18:     <tr>
+    19:       <td><%= product.name %></td>
+    20:       <td><%= product.price%></td>
+  
+app/views/products/index.html.erb:17
+Started GET "/" for ::1 at 2019-12-09 14:45:19 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (Duration: 2.0ms | Allocations: 1422)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 2216)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    14:   </thead>
+    15: 
+    16:   <tbody>
+    17:     <% @products.each do |product| %>
+    18:     <tr>
+    19:       <td><%= product.name %></td>
+    20:       <td><%= product.price%></td>
+  
+app/views/products/index.html.erb:17
+Started POST "/__web_console/repl_sessions/9634440c0f111118399b8494a4341b4d/trace" for ::1 at 2019-12-09 14:45:36 +1100
+Started GET "/" for ::1 at 2019-12-09 15:01:46 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (Duration: 18.9ms | Allocations: 1421)
+Completed 500 Internal Server Error in 22ms (ActiveRecord: 0.0ms | Allocations: 2217)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    14:   </thead>
+    15: 
+    16:   <tbody>
+    17:     <% @products.each do |product| %>
+    18:     <tr>
+    19:       <td><%= product.name %></td>
+    20:       <td><%= product.price%></td>
+  
+app/views/products/index.html.erb:17
+Started GET "/" for ::1 at 2019-12-09 15:10:10 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 1816)
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms | Allocations: 2610)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    14:   </thead>
+    15: 
+    16:   <tbody>
+    17:     <% @products.each do |product| %>
+    18:       <tr>
+    19:         <td><%= product.name %></td>
+    20:         <td><%= product.category %></td>
+  
+app/views/products/index.html.erb:17
+Started GET "/" for ::1 at 2019-12-09 15:25:57 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  Rendered products/index.html.erb within layouts/application (Duration: 1.1ms | Allocations: 1484)
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 1893)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    14:   </thead>
+    15: 
+    16:   <tbody>
+    17:     <% @products.each do |product| %>
+    18:       <tr>
+    19:         <td><%= product.name %></td>
+    20:         <td><%= product.category %></td>
+  
+app/views/products/index.html.erb:17
+Started GET "/" for ::1 at 2019-12-09 15:27:54 +1100
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (1.0ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:4:in `index'
+Completed 200 OK in 77ms (Views: 10.4ms | ActiveRecord: 57.6ms | Allocations: 10707)
+
+
+Started GET "/" for ::1 at 2019-12-09 16:39:10 +1100
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (42.1ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:4:in `index'
+Completed 200 OK in 64ms (Views: 16.1ms | ActiveRecord: 42.1ms | Allocations: 9101)
+
+
+Started GET "/" for ::1 at 2019-12-09 16:39:15 +1100
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.4ms | Allocations: 1220)
+
+
+Started GET "/" for ::1 at 2019-12-09 16:39:58 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:21
+  Rendered products/index.html.erb within layouts/application (Duration: 73.6ms | Allocations: 10672)
+Completed 500 Internal Server Error in 80ms (ActiveRecord: 57.2ms | Allocations: 12788)
+
+
+  
+ActionView::Template::Error (undefined method `image' for #<Product:0x00007f9bc50ada30>):
+    23:         <td><%= product.name %></td>
+    24:         <td><%= product.category %></td>
+    25:         <td><%= product.price %></td>
+    26:         <td><%= product.image %></td>
+    27:         <td><%= link_to 'Show', product %></td>
+    28:         <td><%= link_to 'Edit', edit_product_path(product) %></td>
+    29:         <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  
+app/views/products/index.html.erb:26
+app/views/products/index.html.erb:21
+Started GET "/" for ::1 at 2019-12-09 16:40:22 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:21
+  Rendered products/index.html.erb within layouts/application (Duration: 123.7ms | Allocations: 49092)
+Completed 500 Internal Server Error in 128ms (ActiveRecord: 0.5ms | Allocations: 49896)
+
+
+  
+ActionView::Template::Error (undefined method `product_path' for #<#<Class:0x00007f9bc4d2f4d0>:0x00007f9bc4d2d748>
+Did you mean?  products_new_path):
+    24:         <td><%= product.category %></td>
+    25:         <td><%= product.price %></td>
+    26:         <td><%= product.img_tag %></td>
+    27:         <td><%= link_to 'Show', product %></td>
+    28:         <td><%= link_to 'Edit', edit_product_path(product) %></td>
+    29:         <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    30:       </tr>
+  
+app/views/products/index.html.erb:27
+app/views/products/index.html.erb:21
+Started GET "/" for ::1 at 2019-12-09 16:40:41 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:21
+  Rendered products/index.html.erb within layouts/application (Duration: 113.2ms | Allocations: 49032)
+Completed 500 Internal Server Error in 117ms (ActiveRecord: 0.8ms | Allocations: 49836)
+
+
+  
+ActionView::Template::Error (undefined method `product_path' for #<#<Class:0x00007f9bc4630828>:0x00007f9bc46435e0>
+Did you mean?  products_new_path):
+    24:         <td><%= product.category %></td>
+    25:         <td><%= product.price %></td>
+    26:         <td><%= product.img_tag %></td>
+    27:         <!-- <td><%= link_to 'Show', product %></td>
+    28:         <td><%= link_to 'Edit', edit_product_path(product) %></td>
+    29:         <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+    30:       </tr>
+  
+app/views/products/index.html.erb:27
+app/views/products/index.html.erb:21
+Started GET "/" for ::1 at 2019-12-09 16:40:49 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.7ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:21
+  Rendered products/index.html.erb within layouts/application (Duration: 209.9ms | Allocations: 94695)
+Completed 500 Internal Server Error in 213ms (ActiveRecord: 0.7ms | Allocations: 95499)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `new_product_path' for #<#<Class:0x00007f9bc78cbb70>:0x00007f9bc78d08a0>
+Did you mean?  new_polymorphic_path):
+    32: 
+    33: <br>
+    34: 
+    35: <%= link_to 'New Product', new_product_path %>
+  
+app/views/products/index.html.erb:35
+Started GET "/" for ::1 at 2019-12-09 16:41:04 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:21
+  Rendered products/index.html.erb within layouts/application (Duration: 3.8ms | Allocations: 1156)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 24ms (Views: 22.1ms | ActiveRecord: 0.6ms | Allocations: 5739)
+
+
+Started GET "/" for ::1 at 2019-12-09 16:43:39 +1100
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:4:in `index'
+Completed 200 OK in 19ms (Views: 9.6ms | ActiveRecord: 7.0ms | Allocations: 9313)
+
+
+Started GET "/" for ::1 at 2019-12-09 16:47:34 +1100
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.8ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/products_controller.rb:4:in `index'
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.8ms | Allocations: 1212)
+
+
+Started GET "/" for ::1 at 2019-12-09 16:48:57 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:21
+  Rendered products/index.html.erb within layouts/application (Duration: 14.4ms | Allocations: 7959)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 30ms (Views: 20.8ms | ActiveRecord: 5.2ms | Allocations: 13804)
+
+
+Started GET "/" for ::1 at 2019-12-09 16:51:38 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:21
+  Rendered products/index.html.erb within layouts/application (Duration: 4.0ms | Allocations: 1244)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 15ms (Views: 13.4ms | ActiveRecord: 0.5ms | Allocations: 5814)
+
+
+Started GET "/" for ::1 at 2019-12-09 16:52:36 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:20
+  Rendered products/index.html.erb within layouts/application (Duration: 3.7ms | Allocations: 1238)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 17ms (Views: 15.0ms | ActiveRecord: 0.6ms | Allocations: 5808)
+
+
+Started GET "/" for ::1 at 2019-12-09 16:55:19 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:20
+  Rendered products/index.html.erb within layouts/application (Duration: 3.1ms | Allocations: 972)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 12ms (Views: 10.7ms | ActiveRecord: 0.5ms | Allocations: 4829)
+
+
+Started GET "/proucts" for ::1 at 2019-12-09 18:07:56 +1100
+  
+ActionController::RoutingError (No route matches [GET] "/proucts"):
+  
+actionpack (6.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.2.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/users" for ::1 at 2019-12-10 09:33:26 +1100
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+actionpack (6.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.2.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/users/show" for ::1 at 2019-12-10 09:33:31 +1100
+Processing by UsersController#show as HTML
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.6ms | Allocations: 83)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 27ms (Views: 25.6ms | ActiveRecord: 0.0ms | Allocations: 4870)
+
+
+Started GET "/users/index" for ::1 at 2019-12-10 09:33:54 +1100
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (52.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:4:in `index'
+Completed 200 OK in 144ms (Views: 25.5ms | ActiveRecord: 113.3ms | Allocations: 7173)
+
+
+Started GET "/products/show" for ::1 at 2019-12-10 09:34:34 +1100
+Processing by ProductsController#show as HTML
+  Rendering products/show.html.erb within layouts/application
+  Rendered products/show.html.erb within layouts/application (Duration: 4.7ms | Allocations: 1467)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms | Allocations: 2096)
+
+
+  
+ActionView::Template::Error (undefined method `name' for nil:NilClass):
+    1: <h2><%= @product.name %></h2>
+    2: 
+    3: <p>
+    4:   <strong>Name:</strong>
+  
+app/views/products/show.html.erb:1
+Started GET "/products/show" for ::1 at 2019-12-10 09:36:52 +1100
+Processing by ProductsController#show as HTML
+Completed 404 Not Found in 52ms (ActiveRecord: 47.5ms | Allocations: 1773)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product without an ID):
+  
+app/controllers/products_controller.rb:8:in `show'
+Started GET "/products/show" for ::1 at 2019-12-10 09:39:17 +1100
+Processing by ProductsController#show as HTML
+Completed 404 Not Found in 55ms (ActiveRecord: 48.0ms | Allocations: 2720)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product without an ID):
+  
+app/controllers/products_controller.rb:8:in `show'
+Started GET "/products/show" for ::1 at 2019-12-10 09:39:50 +1100
+Processing by ProductsController#show as HTML
+Completed 404 Not Found in 8ms (ActiveRecord: 4.0ms | Allocations: 1768)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product without an ID):
+  
+app/controllers/products_controller.rb:8:in `show'
+Started GET "/products/show" for ::1 at 2019-12-10 09:43:11 +1100
+Processing by ProductsController#show as HTML
+Completed 404 Not Found in 12ms (ActiveRecord: 6.8ms | Allocations: 1923)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product without an ID):
+  
+app/controllers/products_controller.rb:8:in `show'
+Started GET "/products/show" for ::1 at 2019-12-10 09:43:27 +1100
+Processing by ProductsController#show as HTML
+Completed 404 Not Found in 21ms (ActiveRecord: 6.9ms | Allocations: 2665)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product without an ID):
+  
+app/controllers/products_controller.rb:8:in `show'
+Started GET "/products/show" for ::1 at 2019-12-10 09:46:27 +1100
+Processing by ProductsController#show as HTML
+Completed 404 Not Found in 9ms (ActiveRecord: 5.5ms | Allocations: 2624)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product without an ID):
+  
+app/controllers/products_controller.rb:8:in `show'
+Started GET "/products/show" for ::1 at 2019-12-10 09:50:06 +1100
+Processing by ProductsController#show as HTML
+Completed 404 Not Found in 9ms (ActiveRecord: 5.4ms | Allocations: 2443)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product without an ID):
+  
+app/controllers/products_controller.rb:8:in `show'
+Started GET "/products/show" for ::1 at 2019-12-10 09:51:43 +1100
+Processing by ProductsController#show as HTML
+Completed 404 Not Found in 10ms (ActiveRecord: 6.3ms | Allocations: 2443)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product without an ID):
+  
+app/controllers/products_controller.rb:8:in `show'
+Started GET "/products/show" for ::1 at 2019-12-10 09:52:43 +1100
+Processing by ProductsController#show as HTML
+Completed 404 Not Found in 10ms (ActiveRecord: 6.3ms | Allocations: 2443)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product without an ID):
+  
+app/controllers/products_controller.rb:8:in `show'
+Started GET "/products/show" for ::1 at 2019-12-10 10:03:57 +1100
+Processing by ProductsController#show as HTML
+Completed 404 Not Found in 3ms (ActiveRecord: 0.0ms | Allocations: 2143)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product without an ID):
+  
+app/controllers/products_controller.rb:8:in `show'
+Started GET "/products/show" for ::1 at 2019-12-10 10:04:11 +1100
+Processing by ProductsController#show as HTML
+Completed 404 Not Found in 15ms (ActiveRecord: 9.3ms | Allocations: 2489)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product without an ID):
+  
+app/controllers/products_controller.rb:8:in `show'
+  [1m[36mProduct Load (2.0ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "products"."name" FROM "products"[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "products"."id" FROM "products"[0m
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "products"."id" FROM "products"[0m
+Started GET "/products/show" for ::1 at 2019-12-10 10:55:56 +1100
+  [1m[35m (42.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#show as HTML
+Completed 404 Not Found in 18ms (ActiveRecord: 8.5ms | Allocations: 3285)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product without an ID):
+  
+app/controllers/products_controller.rb:8:in `show'
+Started GET "/products/show" for ::1 at 2019-12-10 10:57:49 +1100
+Processing by ProductsController#show as HTML
+Completed 400 Bad Request in 3ms (ActiveRecord: 0.0ms | Allocations: 1634)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: product):
+  
+app/controllers/products_controller.rb:23:in `product_params'
+app/controllers/products_controller.rb:8:in `show'
+Started GET "/products/show" for ::1 at 2019-12-10 11:04:20 +1100
+Processing by ProductsController#show as HTML
+Completed 404 Not Found in 14ms (ActiveRecord: 10.2ms | Allocations: 2590)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product without an ID):
+  
+app/controllers/products_controller.rb:8:in `show'
+Started PUT "/__web_console/repl_sessions/19f262ee5652ce7f186058d9b85038aa" for ::1 at 2019-12-10 11:05:12 +1100
+Started PUT "/__web_console/repl_sessions/19f262ee5652ce7f186058d9b85038aa" for ::1 at 2019-12-10 11:05:13 +1100
+Started GET "/products/show/3" for ::1 at 2019-12-10 11:05:27 +1100
+  
+ActionController::RoutingError (No route matches [GET] "/products/show/3"):
+  
+actionpack (6.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.2.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started PUT "/__web_console/repl_sessions/78897e31553dfcf3d3d8e5e4839550ba" for ::1 at 2019-12-10 11:05:32 +1100
+Started PUT "/__web_console/repl_sessions/78897e31553dfcf3d3d8e5e4839550ba" for ::1 at 2019-12-10 11:05:33 +1100
+Started GET "/products/show/3" for ::1 at 2019-12-10 11:06:56 +1100
+  
+ArgumentError (Missing :controller key on routes definition, please check your routes.):
+  
+config/routes.rb:15:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started GET "/products/show/3" for ::1 at 2019-12-10 11:07:20 +1100
+  
+ArgumentError (Missing :controller key on routes definition, please check your routes.):
+  
+config/routes.rb:15:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started GET "/products/show/3" for ::1 at 2019-12-10 11:07:49 +1100
+  
+ActionController::RoutingError (No route matches [GET] "/products/show/3"):
+  
+actionpack (6.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.2.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/products/3" for ::1 at 2019-12-10 11:08:03 +1100
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mProduct Load (2.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:8:in `show'
+  Rendering products/show.html.erb within layouts/application
+  Rendered products/show.html.erb within layouts/application (Duration: 111.9ms | Allocations: 46340)
+Completed 500 Internal Server Error in 143ms (ActiveRecord: 12.3ms | Allocations: 56513)
+
+
+  
+ActionView::Template::Error (undefined method `edit_product_path' for #<#<Class:0x00007ff506199e40>:0x00007ff5033bf830>
+Did you mean?  edit_polymorphic_path):
+    17: 
+    18: <img src=<%= @product.img_tag %> >
+    19: 
+    20: <%= link_to 'Edit', edit_product_path(@product) %> |
+    21: <%= link_to 'Back', products_path %>
+  
+app/views/products/show.html.erb:20
+Started GET "/products/3" for ::1 at 2019-12-10 11:30:21 +1100
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:8:in `show'
+  Rendering products/show.html.erb within layouts/application
+  Rendered products/show.html.erb within layouts/application (Duration: 0.5ms | Allocations: 170)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 41ms (Views: 37.4ms | ActiveRecord: 0.8ms | Allocations: 9115)
+
+
+Started GET "/products/" for ::1 at 2019-12-10 11:31:56 +1100
+  
+ActionController::RoutingError (No route matches [GET] "/products"):
+  
+actionpack (6.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.2.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/products" for ::1 at 2019-12-10 11:31:59 +1100
+  
+ActionController::RoutingError (No route matches [GET] "/products"):
+  
+actionpack (6.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.1) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.1) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.2.0) lib/webpacker/dev_server_proxy.rb:23:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.1) lib/rails/engine.rb:526:in `call'
+puma (4.3.1) lib/puma/configuration.rb:228:in `call'
+puma (4.3.1) lib/puma/server.rb:681:in `handle_request'
+puma (4.3.1) lib/puma/server.rb:472:in `process_client'
+puma (4.3.1) lib/puma/server.rb:328:in `block in run'
+puma (4.3.1) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/products/show" for ::1 at 2019-12-10 11:32:26 +1100
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"show"}
+  [1m[36mProduct Load (2.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:8:in `show'
+Completed 404 Not Found in 5ms (ActiveRecord: 2.1ms | Allocations: 930)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Product with 'id'=show):
+  
+app/controllers/products_controller.rb:8:in `show'
+Started GET "/products/index" for ::1 at 2019-12-10 11:33:19 +1100
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (2.1ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:20
+  Rendered products/index.html.erb within layouts/application (Duration: 6.7ms | Allocations: 1265)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 27ms (Views: 23.4ms | ActiveRecord: 2.1ms | Allocations: 5268)
+
+
+Started GET "/products/3" for ::1 at 2019-12-10 12:21:35 +1100
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mProduct Load (1.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/products_controller.rb:8:in `show'
+  Rendering products/show.html.erb within layouts/application
+  Rendered products/show.html.erb within layouts/application (Duration: 0.4ms | Allocations: 17)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 24ms (Views: 18.2ms | ActiveRecord: 1.5ms | Allocations: 4827)
+
+
+Started GET "/" for ::1 at 2019-12-10 14:17:07 +1100
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as HTML
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (1.1ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:20
+  Rendered products/index.html.erb within layouts/application (Duration: 68.3ms | Allocations: 8816)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 110ms (Views: 48.1ms | ActiveRecord: 52.3ms | Allocations: 19196)
+
+

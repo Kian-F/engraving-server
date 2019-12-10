@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  img_tag: MyString
+  category: MyString
+  price: 1.5
+  width: 1
+  height: 1
+  fixing_method: MyString
+
+two:
+  name: MyString
+  img_tag: MyString
+  category: MyString
+  price: 1.5
+  width: 1
+  height: 1
+  fixing_method: MyString
