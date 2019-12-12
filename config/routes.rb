@@ -16,7 +16,8 @@ root :to => "products#index"
   get 'products/edit'
   get 'products/new'
   get 'users/index'
-  get 'users/show'
+  post 'users/index'
+  get 'users/:id' => 'users#show'
   get 'users/edit'
   get 'users/new'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

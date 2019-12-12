@@ -9,7 +9,7 @@
 
 User.destroy_all
 u1 = User.create :name => 'kian', :email => 'kian@gmail.com', :password => 'chicken', :admin => true
-
+u2 = User.create :name => 'test', :email => 'test@ga.com'   , :password => 'chicken', :admin => false
 puts "#{User.count} users created"
 
 
