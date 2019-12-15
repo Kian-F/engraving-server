@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
+
+
 root :to => "products#index"
+
 
   get 'pages/home'
   get 'line_items/index'
@@ -15,8 +18,14 @@ root :to => "products#index"
   get 'products/:id' => 'products#show'
   get 'products/edit'
   get 'products/new'
+
+
   get 'users/index'
   post 'users/index'
+  resources :token, only:[:create]
+  resources :users
+  post 'user/token' => 'user_token#create'
+  post 'find_user' => 'user#find'
   get 'users/:id' => 'users#show'
   get 'users/edit'
   get 'users/new'

@@ -22,8 +22,26 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-  end
+    if @user.presisted?
+      render json: {created: true}
+    else
+      render json:{errors: @user.errors.full_messages, }, status: 422
 end
+end
+
+ def find
+   @user = User.find_by(email: params[:user][:email])
+   if @user
+     render json: @user
+   else
+     @errors = @user.errors.full_messages
+     render json: @errors
+   end
+end
+   def set_user
+     @user = User.find_by(id: params[:id])
+   end
+ end
 
 private
 def user_params
