@@ -14,12 +14,13 @@ puts "#{User.count} users created"
 
 
 Product.destroy_all
-p1 = Product.create :name => 'London', :category => 'Door Sign', :price => 30.0, :img_tag => 'https://sdo.textalk.se/upload/doorsigns/fornicklad_massing_jcgt4748.svg',
+p1 = Product.create :name => 'London', :category => 'Door Sign', :price => 30.0, :img_tag => '/assets/DoorOvalAluminum.svg',
   :material => 'Silver Brass', :width => 40, :height => 30, :fixing_method => 'scrow'
 
 p2 = Product.create :name => 'Oslo', :category => 'Door Sign', :price => 30.0,
-  :img_tag => 'https://sdo.textalk.se/upload/doorsigns/blank_massing_jcgt4746.svg', :material => 'Matt Brass', :width => 40, :height => 30, :fixing_method => 'scrow'
-
+  :img_tag => '/assets/DoorOvalBrass.svg', :material => 'Matt Brass', :width => 40, :height => 30, :fixing_method => 'scrow'
+p3 = Product.create :name => 'Stockholm', :category => 'Name Badge', :price => 20.0,
+    :img_tag => '/assets/image.png', :material => 'Oak', :width => 20, :height => 20, :fixing_method => 'Pin'
 puts "#{Product.count} products created"
 
 Order.destroy_all

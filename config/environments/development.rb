@@ -29,7 +29,7 @@ Rails.application.configure do
   end
 
   config.hosts.clear # ngrok support: Don't block any domain names
-
+  config.action_controller.asset_host = 'localhost'
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
