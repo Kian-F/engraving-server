@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
       render json: {created: true}
     else
-      render json:{errors: @user.errors.full_messages, }, status: 422
+      render json:{errors: @user.errors.full_messages }, status: 422
 end
 end
 

@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find params[:id]
+    render :json => @product
   end
 
   def edit
@@ -15,6 +16,7 @@ class ProductsController < ApplicationController
 
   def new
   end
+
 
 
 

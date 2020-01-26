@@ -15,12 +15,12 @@ puts "#{User.count} users created"
 
 Product.destroy_all
 p1 = Product.create :name => 'London', :category => 'Door Sign', :price => 30.0, :img_tag => '/assets/DoorOvalAluminum.svg',
-  :material => 'Silver Brass', :width => 40, :height => 30, :fixing_method => 'scrow'
+  :material => 'Silver Brass', :width => 40, :height => 30, :fixing_method => 'scrow', :shape => 'oval'
 
 p2 = Product.create :name => 'Oslo', :category => 'Door Sign', :price => 30.0,
-  :img_tag => '/assets/DoorOvalBrass.svg', :material => 'Matt Brass', :width => 40, :height => 30, :fixing_method => 'scrow'
+  :img_tag => '/assets/DoorOvalBrass.svg', :material => 'Matt Brass', :width => 40, :height => 30, :fixing_method => 'scrow',:shape => 'oval'
 p3 = Product.create :name => 'Stockholm', :category => 'Name Badge', :price => 20.0,
-    :img_tag => '/assets/image.png', :material => 'Oak', :width => 20, :height => 20, :fixing_method => 'Pin'
+    :img_tag => '/assets/image.png', :material => 'Oak', :width => 20, :height => 20, :fixing_method => 'Pin', :shape => 'rounded'
 puts "#{Product.count} products created"
 
 Order.destroy_all
